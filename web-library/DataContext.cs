@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using web_library.Entity;
-
 namespace web_library;
 
 public class DataContext : DbContext
@@ -23,4 +21,5 @@ public class DataContext : DbContext
         //todo
     }
 
+    public DbSet<Book.Entity.Book> Books { get; set; }
 }

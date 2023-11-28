@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using web_library;
+using web_library.Book;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,5 +30,6 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
+
 
 app.Run();
