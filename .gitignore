@@ -5,8 +5,6 @@
 /web-library/bin
 /web-library/obj
 /web-library/web-library.csproj.user
-/web-library/web-library.csproj
-/web-library/appsettings.json
 /web-library/obj/project.assets.json
 /web-library/obj/project.nuget.cache
 /web-library/obj/web-library.csproj.nuget.dgspec.json
