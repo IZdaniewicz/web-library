@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using web_library.Entity;
 
 namespace web_library;
 
@@ -22,5 +21,7 @@ public class DataContext : DbContext
     {
         //todo
     }
+
+    public DbSet<Genre.Entity.Genre> Genres { get; set; }
 
 }
