@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using web_library.Book.Entity;
 using web_library;
-using Microsoft.EntityFrameworkCore;
 
 namespace BooksApi.Controllers
 {
@@ -19,8 +18,7 @@ namespace BooksApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Book>> GetBooks()
         {
-            //return _context.Books.ToList();
-            return Ok(_context.Books.Include(b => b.Copies).ToList());
+            return _context.Books.ToList();
         }
     }
 }

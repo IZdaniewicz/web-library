@@ -18,9 +18,8 @@ public class DataContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Book.Entity.Book>().HasMany(b=>b.Copies).WithOne(b=>b.Book).HasForeignKey(b=>b.BookId);
+        //todo
     }
 
     public DbSet<Book.Entity.Book> Books { get; set; }
-    public DbSet<Book.Entity.BookCopy> BooksCopy { get; set; }
 }
