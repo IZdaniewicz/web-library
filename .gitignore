@@ -15,3 +15,10 @@
 /web-library/obj/web-library.csproj.nuget.dgspec.json
 /web-library/obj/web-library.csproj.nuget.g.props
 /web-library/obj/web-library.csproj.nuget.g.targets
+/web-library/Book/Controller/BookController.cs
+/web-library/appsettings.json
+/web-library/obj/project.assets.json
+/web-library/obj/project.nuget.cache
+/web-library/obj/web-library.csproj.nuget.dgspec.json
+/web-library/obj/web-library.csproj.nuget.g.props
+/web-library/obj/web-library.csproj.nuget.g.targets

@@ -17,4 +17,15 @@ public class Book
     public string Location { get; set; }
     public string Description { get; set; }
     public ICollection<BookCopy> Copies { get; } = new List<BookCopy>();
+
+    public Book(string iSBN, string title, string author, string publisher, DateOnly publication_date, string location, string description)
+    {
+        ISBN = iSBN;
+        Title = title;
+        Author = author;
+        Publisher = publisher;
+        Publication_date = publication_date;
+        Location = location;
+        Description = description;
+    }
 }

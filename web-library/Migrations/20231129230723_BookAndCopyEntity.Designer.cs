@@ -12,7 +12,7 @@ using web_library;
 namespace web_library.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231129222057_BookAndCopyEntity")]
+    [Migration("20231129230723_BookAndCopyEntity")]
     partial class BookAndCopyEntity
     {
         /// <inheritdoc />
