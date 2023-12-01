@@ -19,7 +19,7 @@ public class DataContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<web_library.Book.Entity.Book>()
+        modelBuilder.Entity<Book.Entity.Book>()
             .HasMany(left => left.Genres)
             .WithMany(right => right.Books)
                     //.UsingEntity(join => join.ToTable("book_genres"));
