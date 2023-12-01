@@ -14,12 +14,10 @@ using Entity;
 [Route("api/auth")]
 public class AuthController : ControllerBase
 {
-    private readonly IUserRepository _userRepository;
     private readonly IAuthService _authService;
 
-    public AuthController(IUserRepository userRepository, IAuthService authService)
+    public AuthController(IAuthService authService)
     {
-        _userRepository = userRepository;
         _authService = authService;
     }
 

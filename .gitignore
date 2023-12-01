@@ -2,6 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 /.vs
+/.idea
+/web-library/appsettings.json
 /web-library/bin
 /web-library/obj
 /web-library/web-library.csproj.user
