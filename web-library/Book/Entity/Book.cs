@@ -20,7 +20,7 @@ public class Book
     public string Location { get; set; }
     [Column("description")]
     public string Description { get; set; }
-    public ICollection<BookCopy> Copies { get; } = new List<BookCopy>();
+    //public ICollection<BookCopy> Copies { get; } = new List<BookCopy>();
 
     public Book(string iSBN, string title, string author, string publisher, DateOnly publication_date, string location, string description)
     {
