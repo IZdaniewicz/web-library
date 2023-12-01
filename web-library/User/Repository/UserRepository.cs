@@ -1,3 +1,5 @@
+using web_library.Shared;
+
 namespace web_library.User.Repository;
 using Entity;
 
@@ -15,7 +17,7 @@ public class UserRepository : IUserRepository
         User? user =  _dbContext.Users.Find(id);
 
         if (user == null)
-            throw new NotImplementedException();
+            throw new AlreadyExistsException("Email is taken");
         
         return user;
     }

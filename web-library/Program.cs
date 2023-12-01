@@ -38,6 +38,7 @@ builder.Services.AddControllers();
 
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IUserBasicInfoRepository, UserBasicInfoRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 

@@ -2,6 +2,7 @@ using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using web_library.User.Repository;
+using web_library.User.Request;
 using web_library.User.Service;
 
 namespace web_library.User.Controller;
@@ -24,11 +25,11 @@ public class AuthController : ControllerBase
 
     [HttpPost("register")]
     [AllowAnonymous]
-    public ActionResult RegisterUser([FromBody] User user)
+    public ActionResult RegisterUser([FromBody] RegisterUserRequest request)
     {
         try
         {
-            _authService.RegisterUser(user.Email, user.Password);
+            _authService.RegisterUser(request);
             return StatusCode(StatusCodes.Status201Created, "User succesfully registered");
         }
         catch (Exception e)

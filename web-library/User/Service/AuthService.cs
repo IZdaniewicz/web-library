@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using web_library.User.Repository;
+using web_library.User.Request;
 
 namespace web_library.User.Service;
 using Entity;
@@ -13,24 +14,43 @@ using Entity;
 public class AuthService : IAuthService
 {
     private readonly IUserRepository _userRepository;
+    private readonly IUserBasicInfoRepository _userBasicInfoRepository;
     private readonly IConfiguration _configuration;
 
-    public AuthService(IUserRepository userRepository, IConfiguration configuration)
+    public AuthService(
+        IUserRepository userRepository,
+        IConfiguration configuration,
+        IUserBasicInfoRepository userBasicInfo
+        )
     {
         _userRepository = userRepository;
         _configuration = configuration;
+        _userBasicInfoRepository = userBasicInfo;
     }
 
-    public void RegisterUser(string email, string password)
+    public void RegisterUser(RegisterUserRequest request)
     {
-        if (_userRepository.FindByEmail(email) != null)
+        if (_userRepository.FindByEmail(request.Email) != null)
         {
             throw new Exception("Email already taken!");
         }
 
-        string hashedPassword = HashPassword(password);
+        string hashedPassword = HashPassword(request.Password);
 
-        _userRepository.Add(new User(email, hashedPassword));
+        var user = new User(request.Email, hashedPassword);
+
+        _userRepository.Add(user);
+
+        _userBasicInfoRepository.Add(new UserBasicInfo(
+            user.Id,
+            request.FirstName,
+            request.LastName,
+            request.PhoneNumber,
+            request.Address,
+            user
+        ));
+        
+
     }
 
     public ActionResult AuthenticateUser(User request)

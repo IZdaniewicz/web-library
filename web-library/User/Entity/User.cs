@@ -14,6 +14,8 @@ public class User
 
     [Column(name:"password")]
     public string Password { get; set; }
+    
+    public UserBasicInfo? UserBasicInfo { get; set; }
 
     public User(string email, string password)
     {
