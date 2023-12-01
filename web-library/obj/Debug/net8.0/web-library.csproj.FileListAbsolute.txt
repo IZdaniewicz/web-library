@@ -22,6 +22,7 @@
 /home/igor/Desktop/csharp/web-library/web-library/obj/Debug/net8.0/web-library.csproj.CoreCompileInputs.cache
 /home/igor/Desktop/csharp/web-library/web-library/obj/Debug/net8.0/web-library.MvcApplicationPartsAssemblyInfo.cs
 /home/igor/Desktop/csharp/web-library/web-library/obj/Debug/net8.0/web-library.MvcApplicationPartsAssemblyInfo.cache
+/home/igor/Desktop/csharp/web-library/web-library/obj/Debug/net8.0/web-library.sourcelink.json
 /home/igor/Desktop/csharp/web-library/web-library/obj/Debug/net8.0/staticwebassets.build.json
 /home/igor/Desktop/csharp/web-library/web-library/obj/Debug/net8.0/staticwebassets.development.json
 /home/igor/Desktop/csharp/web-library/web-library/obj/Debug/net8.0/staticwebassets/msbuild.web-library.Microsoft.AspNetCore.StaticWebAssets.props
@@ -36,3 +37,12 @@
 /home/igor/Desktop/csharp/web-library/web-library/obj/Debug/net8.0/web-library.pdb
 /home/igor/Desktop/csharp/web-library/web-library/obj/Debug/net8.0/web-library.genruntimeconfig.cache
 /home/igor/Desktop/csharp/web-library/web-library/obj/Debug/net8.0/ref/web-library.dll
+/home/igor/Desktop/csharp/web-library/web-library/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/igor/Desktop/csharp/web-library/web-library/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/home/igor/Desktop/csharp/web-library/web-library/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/igor/Desktop/csharp/web-library/web-library/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/home/igor/Desktop/csharp/web-library/web-library/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/home/igor/Desktop/csharp/web-library/web-library/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/igor/Desktop/csharp/web-library/web-library/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/home/igor/Desktop/csharp/web-library/web-library/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
+/home/igor/Desktop/csharp/web-library/web-library/bin/Debug/net8.0/BCrypt.Net-Core.dll

@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using web_library.Entity;
 
 namespace web_library;
 
@@ -20,7 +19,14 @@ public class DataContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //todo
+        modelBuilder.Entity<User.Entity.User>(entity =>
+        {
+            entity.ToTable("users");
+            entity.HasIndex(u => u.Email).IsUnique();
+        });
     }
+
+    public DbSet<User.Entity.User> Users { get; set; }
+    
 
 }
