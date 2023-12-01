@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 namespace web_library.Book.Entity;
 
-using Microsoft.VisualBasic;
 using web_library.Genre.Entity;
 
 [Table("books")]
