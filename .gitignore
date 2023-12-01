@@ -1,7 +1,10 @@
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
+
 /.vs
+/web-library/bin/Release/net8.0
+/web-library/obj/Release/net8.0
 /web-library/bin
 /web-library/obj
 /web-library/web-library.csproj.user
@@ -10,6 +13,7 @@
 /web-library/obj/web-library.csproj.nuget.dgspec.json
 /web-library/obj/web-library.csproj.nuget.g.props
 /web-library/obj/web-library.csproj.nuget.g.targets
+/web-library/web-library.csproj.user
 /web-library/obj/project.assets.json
 /web-library/obj/project.nuget.cache
 /web-library/obj/web-library.csproj.nuget.dgspec.json
@@ -25,3 +29,5 @@
 /web-library/bin/Debug/net8.0/web-library.dll
 /web-library/bin/Debug/net8.0/web-library.dll
 /web-library/bin/Debug/net8.0/web-library.dll
+/web-library/Book/Controller/testController.cs
+/web-library/scrath.txt
