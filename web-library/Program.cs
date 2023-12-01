@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using web_library;
 using web_library.User.Repository;
 using web_library.User.Service;
+using web_library.Book;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,6 +49,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAuthorization();
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase"))
+);
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+}); ;
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

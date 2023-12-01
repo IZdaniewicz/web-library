@@ -29,4 +29,6 @@ public class DataContext : DbContext
     public DbSet<User.Entity.User> Users { get; set; }
     
 
+    public DbSet<Book.Entity.Book> Books { get; set; }
+    public DbSet<Book.Entity.BookCopy> BooksCopy { get; set; }
 }
