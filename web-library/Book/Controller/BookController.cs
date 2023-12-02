@@ -37,7 +37,14 @@ namespace web_library.Book.Controller
         [HttpPost]
         public ActionResult Post([FromBody] CreateBookRequest request)
         {
-            _bookService.createBook(request);
+            try
+            {
+                _bookService.createBook(request);
+            } catch
+            (Exception)
+            {
+                return NotFound();
+            }
             return Ok();
         }
 
