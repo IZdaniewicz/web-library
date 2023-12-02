@@ -2,7 +2,6 @@
 
 namespace web_library.Genre.Controller
 {
-    using Microsoft.AspNetCore.Authorization;
     using web_library.Genre.Request;
     using web_library.Genre.Service;
 
@@ -17,10 +16,7 @@ namespace web_library.Genre.Controller
             _genreService = genreService;
         }
 
-        // POST: api/Genres
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult Post([FromBody] CreateGenreRequest request)
         {
             try
