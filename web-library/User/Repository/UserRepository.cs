@@ -11,14 +11,14 @@ public class UserRepository : IUserRepository
     {
         _dbContext = dbContext;
     }
-    
+
     public User GetByIdOrThrow(int id)
     {
-        User? user =  _dbContext.Users.Find(id);
+        User? user = _dbContext.Users.Find(id);
 
         if (user == null)
             throw new AlreadyExistsException("Email is taken");
-        
+
         return user;
     }
 

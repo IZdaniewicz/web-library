@@ -34,7 +34,7 @@ namespace web_library.Migrations
 
                     b.HasIndex("genre_id");
 
-                    b.ToTable("book_genres");
+                    b.ToTable("book_genres", (string)null);
                 });
 
             modelBuilder.Entity("web_library.Book.Entity.Book", b =>
@@ -82,7 +82,7 @@ namespace web_library.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("books");
+                    b.ToTable("books", (string)null);
                 });
 
             modelBuilder.Entity("web_library.Book.Entity.BookCopy", b =>
@@ -102,7 +102,7 @@ namespace web_library.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("book_copies");
+                    b.ToTable("book_copies", (string)null);
                 });
 
             modelBuilder.Entity("web_library.Genre.Entity.Genre", b =>
@@ -121,7 +121,7 @@ namespace web_library.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("genres");
+                    b.ToTable("genres", (string)null);
                 });
 
             modelBuilder.Entity("web_library.User.Entity.User", b =>

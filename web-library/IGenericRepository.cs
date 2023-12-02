@@ -1,4 +1,4 @@
-namespace web_library;
+﻿namespace web_library;
 
 public interface IGenericRepository<T> where T : class
 {
