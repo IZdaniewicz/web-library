@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using web_library.User.Request;
 
-namespace web_library.User.Service;
-using Entity;
-
-public interface IAuthService
+namespace web_library.User.Service
 {
-    void RegisterUser(RegisterUserRequest request);
-    ActionResult AuthenticateUser(User request);
+    public interface IAuthService
+    {
+        ActionResult AuthenticateUser(LoginUserRequest request);
+        void RegisterUser(RegisterUserRequest request);
+    }
 }

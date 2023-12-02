@@ -38,7 +38,7 @@ public class AuthController : ControllerBase
     
     [HttpPost("login")]
     [AllowAnonymous]
-    public ActionResult AuthenticateUser([FromBody] User request)
+    public ActionResult AuthenticateUser([FromBody] LoginUserRequest request)
     {
         return _authService.AuthenticateUser(request);
     }
