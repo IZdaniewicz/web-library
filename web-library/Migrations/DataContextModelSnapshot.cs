@@ -105,6 +105,25 @@ namespace web_library.Migrations
                     b.ToTable("book_copies");
                 });
 
+            modelBuilder.Entity("web_library.Genre.Entity.Genre", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("genres");
+                });
+
             modelBuilder.Entity("web_library.User.Entity.User", b =>
                 {
                     b.Property<int>("Id")
@@ -163,7 +182,7 @@ namespace web_library.Migrations
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer")
-                        .HasColumnName("userId");
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
@@ -171,25 +190,6 @@ namespace web_library.Migrations
                         .IsUnique();
 
                     b.ToTable("user_basic_info", (string)null);
-                });
-
-            modelBuilder.Entity("web_library.Genre.Entity.Genre", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("genres");
                 });
 
             modelBuilder.Entity("book_genres", b =>

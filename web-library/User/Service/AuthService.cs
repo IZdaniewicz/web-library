@@ -49,11 +49,11 @@ public class AuthService : IAuthService
             request.Address,
             user
         ));
-        
+
 
     }
 
-    public ActionResult AuthenticateUser(User request)
+    public ActionResult AuthenticateUser(LoginUserRequest request)
     {
         try
         {
@@ -64,7 +64,7 @@ public class AuthService : IAuthService
                 var issuer = _configuration["Jwt:Issuer"];
                 var audience = _configuration["Jwt:Audience"];
                 var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
-                
+
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new[]
@@ -80,7 +80,7 @@ public class AuthService : IAuthService
                     (new SymmetricSecurityKey(key),
                         SecurityAlgorithms.HmacSha512Signature)
                 };
-                
+
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var token = tokenHandler.CreateToken(tokenDescriptor);
                 var stringToken = tokenHandler.WriteToken(token);
