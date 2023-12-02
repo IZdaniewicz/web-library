@@ -9,7 +9,7 @@ public class UserBasicInfo
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
-    [Column(name: "userId")] public int UserId { get; set; }
+    [Column(name: "user_id")] public int UserId { get; set; }
 
     [Column(name: "first_name")] public string FirstName { get; set; }
 

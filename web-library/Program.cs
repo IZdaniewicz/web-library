@@ -45,6 +45,9 @@ builder.Services.AddTransient<IUserBasicInfoRepository, UserBasicInfoRepository>
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 
+builder.Services.AddTransient<IBookRepository, BookRepository>();
+builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddTransient<IBookCopyRepository, BookCopyRepository>();
 
 
 // Add services to the container.
@@ -61,9 +64,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 
-builder.Services.AddTransient<IBookRepository, BookRepository>();
-builder.Services.AddTransient<IBookService, BookService>();
-builder.Services.AddTransient<IBookCopyRepository, BookCopyRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
