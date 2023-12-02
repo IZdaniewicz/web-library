@@ -29,7 +29,7 @@ public class DataContext : DbContext
             j => j.HasOne<Genre.Entity.Genre>().WithMany().HasForeignKey("genre_id"), 
             j => j.HasOne<Book.Entity.Book>().WithMany().HasForeignKey("book_id")
         );
-    }
+    
         modelBuilder.Entity<User.Entity.User>(entity =>
         {
             entity.ToTable("users");
