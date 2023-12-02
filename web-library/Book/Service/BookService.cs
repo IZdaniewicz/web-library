@@ -24,7 +24,7 @@ namespace web_library.Book.Service
 
             _bookRepository.Add(entity);
 
-            for (int i = 0;i<request.numberOfCopies;i++)
+            for (int i = 0; i < request.numberOfCopies; i++)
             {
                 BookCopy copy = new(entity);
                 _bookCopyRepository.Add(copy);
