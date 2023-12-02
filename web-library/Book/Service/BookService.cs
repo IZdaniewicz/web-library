@@ -20,7 +20,7 @@ namespace web_library.Book.Service
         {
             var jsonString = JsonConvert.SerializeObject(request);
 
-            Book? entity = JsonConvert.DeserializeObject<Book>(jsonString) ?? throw new NotImplementedException();
+            Book? entity = JsonConvert.DeserializeObject<Book>(jsonString) ?? throw new JsonException();
 
             _bookRepository.Add(entity);
 
