@@ -17,7 +17,7 @@ public class Book
     [Column("publisher")]
     public string Publisher { get; set; }
     [Column("publication_date")]
-    public DateOnly Publication_date{ get; set; }
+    public DateOnly Publication_date { get; set; }
     [Column("location")]
     public string Location { get; set; }
     [Column("description")]
@@ -25,7 +25,8 @@ public class Book
     public ICollection<BookCopy> Copies { get; }
     public ICollection<Genre> Genres { get; }
 
-    public Book() {
+    public Book()
+    {
         Genres = new List<Genre>();
         Copies = new List<BookCopy>();
     }

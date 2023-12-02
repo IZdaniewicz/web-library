@@ -40,7 +40,8 @@ namespace web_library.Book.Controller
             try
             {
                 _bookService.createBook(request);
-            } catch
+            }
+            catch
             (Exception)
             {
                 return NotFound();

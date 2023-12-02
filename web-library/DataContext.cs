@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System.Drawing;
 using web_library.User.Entity;
 
 namespace web_library;
@@ -18,7 +17,7 @@ public class DataContext : DbContext
         // connect to postgres with connection string from app settings
         options.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
     }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Book.Entity.Book>()
@@ -26,21 +25,21 @@ public class DataContext : DbContext
             .WithMany(right => right.Books)
             .UsingEntity<Dictionary<string, object>>(
             "book_genres",
-            j => j.HasOne<Genre.Entity.Genre>().WithMany().HasForeignKey("genre_id"), 
+            j => j.HasOne<Genre.Entity.Genre>().WithMany().HasForeignKey("genre_id"),
             j => j.HasOne<Book.Entity.Book>().WithMany().HasForeignKey("book_id")
         );
-    
+
         modelBuilder.Entity<User.Entity.User>(entity =>
         {
             entity.ToTable("users");
             entity.HasIndex(u => u.Email).IsUnique();
-            
+
             entity.HasOne(u => u.UserBasicInfo)
                 .WithOne(ubi => ubi.User)
                 .HasForeignKey<UserBasicInfo>(ubi => ubi.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
-        
+
         modelBuilder.Entity<UserBasicInfo>(entity =>
         {
             entity.ToTable("user_basic_info");
@@ -52,10 +51,10 @@ public class DataContext : DbContext
         });
 
         base.OnModelCreating(modelBuilder);
-    }   
+    }
 
     public DbSet<User.Entity.User> Users { get; set; }
-    
+
 
     public DbSet<Book.Entity.Book> Books { get; set; }
     public DbSet<Book.Entity.BookCopy> BooksCopy { get; set; }

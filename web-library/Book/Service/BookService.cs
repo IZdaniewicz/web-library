@@ -20,11 +20,11 @@ namespace web_library.Book.Service
         {
             var jsonString = JsonConvert.SerializeObject(request);
 
-            Book? entity = JsonConvert.DeserializeObject<Book>(jsonString) ?? throw new NotImplementedException();
+            Book? entity = JsonConvert.DeserializeObject<Book>(jsonString) ?? throw new JsonException();
 
             _bookRepository.Add(entity);
 
-            for (int i = 0;i<request.numberOfCopies;i++)
+            for (int i = 0; i < request.numberOfCopies; i++)
             {
                 BookCopy copy = new(entity);
                 _bookCopyRepository.Add(copy);

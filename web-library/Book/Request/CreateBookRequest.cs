@@ -1,8 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
-using web_library.Book.Entity;
-
-namespace web_library.Book.Request
+﻿namespace web_library.Book.Request
 {
     public class CreateBookRequest
     {

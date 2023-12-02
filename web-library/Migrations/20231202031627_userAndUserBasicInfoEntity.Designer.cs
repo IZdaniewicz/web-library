@@ -12,7 +12,11 @@ using web_library;
 namespace web_library.Migrations
 {
     [DbContext(typeof(DataContext))]
+<<<<<<<< HEAD:web-library/Migrations/20231202024346_userAndUserBasicInfoEntity.Designer.cs
     [Migration("20231202024346_userAndUserBasicInfoEntity")]
+========
+    [Migration("20231202031627_userAndUserBasicInfoEntity")]
+>>>>>>>> 5-endpoint-do-dodawania-ksiązki:web-library/Migrations/20231202031627_userAndUserBasicInfoEntity.Designer.cs
     partial class userAndUserBasicInfoEntity
     {
         /// <inheritdoc />
