@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using web_library;
@@ -11,9 +12,11 @@ using web_library;
 namespace web_library.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231201221253_UserWithInfo")]
+    partial class UserWithInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace web_library.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("book_genres", b =>
-                {
-                    b.Property<int>("book_id")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("genre_id")
-                        .HasColumnType("integer");
-
-                    b.HasKey("book_id", "genre_id");
-
-                    b.HasIndex("genre_id");
-
-                    b.ToTable("book_genres");
-                });
 
             modelBuilder.Entity("web_library.Book.Entity.Book", b =>
                 {
@@ -171,40 +159,6 @@ namespace web_library.Migrations
                         .IsUnique();
 
                     b.ToTable("user_basic_info", (string)null);
-                });
-
-            modelBuilder.Entity("web_library.Genre.Entity.Genre", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("genres");
-                });
-
-            modelBuilder.Entity("book_genres", b =>
-                {
-                    b.HasOne("web_library.Book.Entity.Book", null)
-                        .WithMany()
-                        .HasForeignKey("book_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("web_library.Genre.Entity.Genre", null)
-                        .WithMany()
-                        .HasForeignKey("genre_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("web_library.Book.Entity.BookCopy", b =>
