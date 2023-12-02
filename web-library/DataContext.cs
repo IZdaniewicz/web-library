@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Drawing;
+using web_library.User.Entity;
+
 namespace web_library;
 
 public class DataContext : DbContext
@@ -27,10 +29,38 @@ public class DataContext : DbContext
             j => j.HasOne<Genre.Entity.Genre>().WithMany().HasForeignKey("genre_id"), 
             j => j.HasOne<Book.Entity.Book>().WithMany().HasForeignKey("book_id")
         );
-    }
+    
+        modelBuilder.Entity<User.Entity.User>(entity =>
+        {
+            entity.ToTable("users");
+            entity.HasIndex(u => u.Email).IsUnique();
+            
+            entity.HasOne(u => u.UserBasicInfo)
+                .WithOne(ubi => ubi.User)
+                .HasForeignKey<UserBasicInfo>(ubi => ubi.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+        
+        modelBuilder.Entity<UserBasicInfo>(entity =>
+        {
+            entity.ToTable("user_basic_info");
+
+            entity.Property(ubi => ubi.UserId).IsRequired();
+
+            entity.HasIndex(ubi => ubi.UserId).IsUnique();
+
+        });
+
+        base.OnModelCreating(modelBuilder);
+    }   
+
+    public DbSet<User.Entity.User> Users { get; set; }
+    
 
     public DbSet<Book.Entity.Book> Books { get; set; }
     public DbSet<Book.Entity.BookCopy> BooksCopy { get; set; }
     public DbSet<Genre.Entity.Genre> Genres { get; set; }
 
+
+    public DbSet<UserBasicInfo> UserBasicInfos { get; set; }
 }
