@@ -1,10 +1,7 @@
-﻿using web_library.Shared;
-namespace web_library.Genre.Repository
+﻿namespace web_library.Genre.Repository
 {
     using Entity;
-    using System.Collections.Generic;
-
-    public class GenreRepository : IGenreRepository
+    public class GenreRepository :  IGenreRepository
     {
         private readonly DataContext _context;
         public GenreRepository(DataContext context)
@@ -15,6 +12,7 @@ namespace web_library.Genre.Repository
         public void Add(Genre entity)
         {
             _context.Genres.Add(entity);
+            _context.Add(entity);
             _context.SaveChanges();
         }
 
@@ -27,6 +25,7 @@ namespace web_library.Genre.Repository
         {
             Genre? genre = _context.Genres.Find(id) ?? throw new NotFoundException("Genre not found");
             return genre;
+            throw new NotImplementedException();
         }
 
         public void Remove(Genre entity)

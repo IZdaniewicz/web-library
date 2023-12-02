@@ -1,4 +1,5 @@
-﻿using web_library.Genre.Repository;
+﻿using Newtonsoft.Json;
+using web_library.Genre.Repository;
 using web_library.Genre.Request;
 
 namespace web_library.Genre.Service
@@ -9,6 +10,7 @@ namespace web_library.Genre.Service
     public class GenreService : IGenreService
     {
         private readonly IGenreRepository _genreRepository;
+
         public GenreService(IGenreRepository genreRepository)
         {
             _genreRepository = genreRepository;
