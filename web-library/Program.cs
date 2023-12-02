@@ -4,11 +4,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using web_library;
-using web_library.Book.DataProvider;
-using web_library.Book.Repository;
-using web_library.Book.Service;
-using web_library.User.Repository;
-using web_library.User.Service;
+using web_library.Api.Book.Repository;
+using web_library.Api.Book.Service;
+using web_library.Api.User.Repository;
+using web_library.Api.User.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
