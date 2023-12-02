@@ -1,6 +1,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 namespace web_library.Book.Entity;
 
+using web_library.Genre.Entity;
+
 [Table("books")]
 public class Book
 {
@@ -20,7 +22,13 @@ public class Book
     public string Location { get; set; }
     [Column("description")]
     public string Description { get; set; }
-    public ICollection<BookCopy> Copies { get; } = new List<BookCopy>();
+    public ICollection<BookCopy> Copies { get; }
+    public ICollection<Genre> Genres { get; }
+
+    public Book() {
+        Genres = new List<Genre>();
+        Copies = new List<BookCopy>();
+    }
 
     public Book(string iSBN, string title, string author, string publisher, DateOnly publication_date, string location, string description)
     {
@@ -31,5 +39,14 @@ public class Book
         Publication_date = publication_date;
         Location = location;
         Description = description;
+        Genres = new List<Genre>();
+        Copies = new List<BookCopy>();
     }
+
+    public void AddGenre(Genre genre)
+    {
+        this.Genres.Add(genre);
+    }
+
+
 }
