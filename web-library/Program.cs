@@ -7,6 +7,8 @@ using web_library;
 using web_library.Book.DataProvider;
 using web_library.Book.Repository;
 using web_library.Book.Service;
+using web_library.Genre.Repository;
+using web_library.Genre.Service;
 using web_library.User.Repository;
 using web_library.User.Service;
 
@@ -44,6 +46,8 @@ builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserBasicInfoRepository, UserBasicInfoRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<IGenreRepository,GenreRepository>();
+builder.Services.AddTransient<IGenreService, GenreService>();
 
 
 

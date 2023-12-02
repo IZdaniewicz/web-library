@@ -1,4 +1,5 @@
-﻿namespace web_library.Book.DataProvider
+﻿using web_library.Shared;
+namespace web_library.Book.DataProvider
 {
     using Entity;
     public class BookRepository : IBookRepository
@@ -22,7 +23,8 @@
 
         public Book GetByIdOrThrow(int id)
         {
-            throw new NotImplementedException();
+            Book? book = _context.Books.Find(id) ?? throw new NotFoundException("Book not found");
+            return book;
         }
 
         public void Remove(Book entity)
