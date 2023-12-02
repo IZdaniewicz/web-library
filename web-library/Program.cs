@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using web_library;
-using web_library.Book;
+using web_library.Book.DataProvider;
+using web_library.Book.Repository;
+using web_library.Book.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +17,11 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-}); ;
+});
 
+builder.Services.AddTransient<IBookRepository, BookRepository>();
+builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddTransient<IBookCopyRepository, BookCopyRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
