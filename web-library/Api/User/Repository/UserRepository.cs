@@ -2,8 +2,6 @@ using web_library.Shared;
 
 namespace web_library.Api.User.Repository;
 using Entity;
-using web_library.Api.User.Entity;
-
 public class UserRepository : IUserRepository
 {
     private readonly DataContext _dbContext;
@@ -13,7 +11,7 @@ public class UserRepository : IUserRepository
         _dbContext = dbContext;
     }
 
-    public User GetByIdOrThrow(int id)
+    public User FindByIdOrThrow(int id)
     {
         User? user = _dbContext.Users.Find(id);
 
@@ -28,7 +26,7 @@ public class UserRepository : IUserRepository
         return _dbContext.Users.SingleOrDefault(user => user.Email == email);
     }
 
-    public IEnumerable<User> GetAll()
+    public IEnumerable<User> FindAll()
     {
         return _dbContext.Users.ToList();
     }

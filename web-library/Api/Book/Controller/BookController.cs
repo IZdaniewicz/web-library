@@ -1,64 +1,63 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+namespace web_library.Api.Book.Controller;
 
-namespace web_library.Api.Book.Controller
+using DataProvider;
+using Request;
+using Service;
+using Model;
+
+[Route("api/[controller]")]
+[ApiController]
+public class BookController : ControllerBase
 {
-    using Entity;
-    using web_library.Api.Book.Request;
-    using web_library.Api.Book.Service;
+    private readonly IBookService _bookService;
+    private readonly IBookDataProvider _bookDataProvider;
 
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BookController : ControllerBase
+    public BookController(IBookService bookService, IBookDataProvider bookDataProvider)
     {
-        private readonly IBookService _bookService;
+        _bookService = bookService;
+        _bookDataProvider = bookDataProvider;
+    }
 
-        public BookController(IBookService bookService)
-        {
-            _bookService = bookService;
-        }
+    [HttpGet]
+    public ActionResult<IEnumerable<BookModel>> Index()
+    {
+        return Ok(_bookDataProvider.getAll());
+    }
 
-        // GET: api/<ValuesController>
-        [HttpGet]
-        public ActionResult<IEnumerable<Book>> Get()
-        {
-            return Ok();
-        }
+    [HttpGet("{id}")]
+    public ActionResult<BookModel> Index(int id)
+    {
+        
+        return Ok(_bookDataProvider.getById(id));
+    }
 
-        // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+    // POST api/<ValuesController>
+    [HttpPost]
+    public ActionResult Create([FromBody] CreateBookRequest request)
+    {
+        try
         {
-            return "value";
+            _bookService.createBook(request);
         }
+        catch
+        (Exception)
+        {
+            return NotFound();
+        }
+        return Ok();
+    }
 
-        // POST api/<ValuesController>
-        [HttpPost]
-        public ActionResult Post([FromBody] CreateBookRequest request)
-        {
-            try
-            {
-                _bookService.createBook(request);
-            }
-            catch
-            (Exception)
-            {
-                return NotFound();
-            }
-            return Ok();
-        }
+    // SEED
+    [HttpPost("seed")]
+    public ActionResult Seed(CreateBookRequest request)
+    {
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+            CreateBookRequest bookRequest = new CreateBookRequest("random");
+            _bookService.createBook(bookRequest);
+    
+        return Ok();
     }
 }
+

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 namespace web_library.Api.Book.Entity;
 
-using web_library.Api.Genre.Entity;
+using Genre.Entity;
 
 [Table("books")]
 public class Book

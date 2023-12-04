@@ -5,7 +5,7 @@ namespace web_library
     using Api.Book.Entity;
     using Api.Genre.Entity;
     using Api.User.Entity;
-    using Api.BookReservation.Entity;
+    using Api.Reservation.Entity;
 
     public class DataContext : DbContext
     {
@@ -20,6 +20,7 @@ namespace web_library
         {
             // connect to postgres with connection string from app settings
             options.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
+            options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

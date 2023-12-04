@@ -2,8 +2,8 @@
 
 public interface IGenericRepository<T> where T : class
 {
-    T GetByIdOrThrow(int id);
-    IEnumerable<T> GetAll();
+    T FindByIdOrThrow(int id);
+    IEnumerable<T> FindAll();
     void Add(T entity);
     void Remove(T entity);
 }

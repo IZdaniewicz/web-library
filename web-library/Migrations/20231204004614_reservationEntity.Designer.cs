@@ -12,7 +12,7 @@ using web_library;
 namespace web_library.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231202061543_reservationEntity")]
+    [Migration("20231204004614_reservationEntity")]
     partial class reservationEntity
     {
         /// <inheritdoc />
@@ -108,27 +108,6 @@ namespace web_library.Migrations
                     b.ToTable("book_copies");
                 });
 
-            modelBuilder.Entity("web_library.Api.BookReservation.Entity.Reservation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("bookCopyId")
-                        .HasColumnType("integer")
-                        .HasColumnName("book_copy_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("bookCopyId")
-                        .IsUnique();
-
-                    b.ToTable("reservations");
-                });
-
             modelBuilder.Entity("web_library.Api.Genre.Entity.Genre", b =>
                 {
                     b.Property<int>("Id")
@@ -146,6 +125,35 @@ namespace web_library.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("genres");
+                });
+
+            modelBuilder.Entity("web_library.Api.Reservation.Entity.Reservation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("bookCopyId")
+                        .HasColumnType("integer")
+                        .HasColumnName("book_copy_id");
+
+                    b.Property<DateOnly>("reservationEndDate")
+                        .HasColumnType("date")
+                        .HasColumnName("reservation_end_date");
+
+                    b.Property<DateOnly>("reservationStartDate")
+                        .HasColumnType("date")
+                        .HasColumnName("reservation_start_date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("bookCopyId")
+                        .IsUnique();
+
+                    b.ToTable("reservations");
                 });
 
             modelBuilder.Entity("web_library.Api.User.Entity.User", b =>
@@ -242,11 +250,11 @@ namespace web_library.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("web_library.Api.BookReservation.Entity.Reservation", b =>
+            modelBuilder.Entity("web_library.Api.Reservation.Entity.Reservation", b =>
                 {
                     b.HasOne("web_library.Api.Book.Entity.BookCopy", "bookCopy")
                         .WithOne("reservation")
-                        .HasForeignKey("web_library.Api.BookReservation.Entity.Reservation", "bookCopyId")
+                        .HasForeignKey("web_library.Api.Reservation.Entity.Reservation", "bookCopyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

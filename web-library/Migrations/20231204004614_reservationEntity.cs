@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -17,6 +18,8 @@ namespace web_library.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    reservation_start_date = table.Column<DateOnly>(type: "date", nullable: false),
+                    reservation_end_date = table.Column<DateOnly>(type: "date", nullable: false),
                     book_copy_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

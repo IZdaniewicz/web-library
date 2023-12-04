@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using web_library.Api.BookReservation.Entity;
 
 namespace web_library.Api.Book.Entity;
+using Reservation.Entity;
 
 [Table("book_copies")]
 public class BookCopy

@@ -7,9 +7,8 @@ using System.Text;
 
 namespace web_library.Api.User.Service;
 using Entity;
-using web_library.Api.User.Entity;
-using web_library.Api.User.Repository;
-using web_library.Api.User.Request;
+using Repository;
+using Request;
 
 public class AuthService : IAuthService
 {
