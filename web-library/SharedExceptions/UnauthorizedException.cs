@@ -1,6 +1,6 @@
 namespace web_library.SharedExceptions;
 
-public class UnauthorizedException
+public class UnauthorizedException : Exception
 {
     public UnauthorizedException()
     {

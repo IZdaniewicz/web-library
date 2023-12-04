@@ -5,6 +5,7 @@ using web_library.Book.Entity;
 using web_library.Book.Repository;
 using web_library.Book.Request;
 using web_library.Role.Enum;
+using web_library.SharedExceptions;
 using web_library.User.Service;
 
 namespace web_library.Book.Service
@@ -28,6 +29,7 @@ namespace web_library.Book.Service
         {
             if (!_userService.HasRole(_userService.GetUser(), Roles.Librarian))
             {
+                throw new UnauthorizedException();
             }
 
             var jsonString = JsonConvert.SerializeObject(request);
