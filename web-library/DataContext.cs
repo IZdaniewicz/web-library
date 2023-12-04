@@ -1,6 +1,5 @@
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using web_library.Book.Entity;
 using web_library.User.Entity;
 
 namespace web_library;
@@ -16,13 +15,11 @@ public class DataContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        // connect to postgres with connection string from app settings
         options.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
         modelBuilder.Entity<User.Entity.User>(entity =>
         {
             entity.ToTable("users");
@@ -41,19 +38,21 @@ public class DataContext : DbContext
             entity.Property(ubi => ubi.UserId).IsRequired();
 
             entity.HasIndex(ubi => ubi.UserId).IsUnique();
+        });
 
+        modelBuilder.Entity<Role.Entity.Role>(entity =>
+        {
+            entity.ToTable("roles");
+            entity.HasKey(r => r.Id);
         });
 
         base.OnModelCreating(modelBuilder);
     }
 
     public DbSet<User.Entity.User> Users { get; set; }
-
-
     public DbSet<Book.Entity.Book> Books { get; set; }
-    public DbSet<Book.Entity.BookCopy> BooksCopy { get; set; }
+    public DbSet<BookCopy> BooksCopy { get; set; }
     public DbSet<Genre.Entity.Genre> Genres { get; set; }
-
-
     public DbSet<UserBasicInfo> UserBasicInfos { get; set; }
+    public DbSet<Role.Entity.Role> Roles { get; set; }
 }

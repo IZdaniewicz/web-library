@@ -12,6 +12,7 @@ using web_library;
 using web_library.Book.DataProvider;
 using web_library.Book.Repository;
 using web_library.Book.Service;
+using web_library.Role.Repository;
 using web_library.User.Repository;
 using web_library.User.Service;
 
@@ -61,23 +62,22 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "Bearer"
     });
     c.AddSecurityRequirement(new OpenApiSecurityRequirement()
-      {
+    {
         {
-          new OpenApiSecurityScheme
-          {
-            Reference = new OpenApiReference
-              {
-                Type = ReferenceType.SecurityScheme,
-                Id = "Bearer"
-              },
-              Scheme = "oauth2",
-              Name = "Bearer",
-              In = ParameterLocation.Header,
-
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header,
             },
             new List<string>()
-          }
-        });
+        }
+    });
 });
 
 builder.Services.AddAuthorization();
@@ -89,6 +89,8 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<IBookCopyRepository, BookCopyRepository>();
@@ -98,6 +100,7 @@ builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserBasicInfoRepository, UserBasicInfoRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 
 
 var app = builder.Build();
@@ -114,9 +117,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
 app.Run();

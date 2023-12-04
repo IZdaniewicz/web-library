@@ -1,22 +1,22 @@
-using System;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using web_library.Role.Enum;
 using web_library.User.Request;
 using web_library.User.Service;
 
 namespace web_library.User.Controller;
-using Microsoft.AspNetCore.Mvc;
-
 
 [ApiController]
 [Route("api/auth")]
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
+    private readonly IUserService _userService;
 
-    public AuthController(IAuthService authService)
+    public AuthController(IAuthService authService, IUserService userService)
     {
         _authService = authService;
+        _userService = userService;
     }
 
     [HttpPost("register")]
@@ -39,5 +39,13 @@ public class AuthController : ControllerBase
     public ActionResult AuthenticateUser([FromBody] LoginUserRequest request)
     {
         return _authService.AuthenticateUser(request);
+    }
+
+    [HttpGet("xd")]
+    [Authorize]
+    public ActionResult Xd()
+    {
+        var user = _userService.GetUser();
+        return Ok(_userService.HasRole(user, Roles.Admin));
     }
 }
