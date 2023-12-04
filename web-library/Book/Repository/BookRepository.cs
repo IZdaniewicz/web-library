@@ -1,6 +1,9 @@
-﻿namespace web_library.Book.DataProvider
+﻿using System;
+using System.Collections.Generic;
+using web_library.Book.DataProvider;
+
+namespace web_library.Book.Repository
 {
-    using Entity;
     public class BookRepository : IBookRepository
     {
         private readonly DataContext _context;
@@ -9,28 +12,28 @@
             _context = context;
         }
 
-        public void Add(Book entity)
+        public void Add(Entity.Book entity)
         {
             _context.Books.Add(entity);
             _context.SaveChanges();
         }
 
-        public IEnumerable<Book> GetAll()
+        public IEnumerable<Entity.Book> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Book GetByIdOrThrow(int id)
+        public Entity.Book GetByIdOrThrow(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Remove(Book entity)
+        public void Remove(Entity.Book entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Book entity)
+        public void Update(Entity.Book entity)
         {
             _context.Books.Update(entity);
             _context.SaveChanges();

@@ -1,8 +1,13 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using web_library;
 using web_library.Book.DataProvider;
 using web_library.Book.Repository;
@@ -38,13 +43,6 @@ builder.Services.AddAuthentication(options =>
 
 
 builder.Services.AddControllers();
-
-
-builder.Services.AddTransient<IUserRepository, UserRepository>();
-builder.Services.AddTransient<IUserBasicInfoRepository, UserBasicInfoRepository>();
-builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<IAuthService, AuthService>();
-
 
 
 // Add services to the container.
@@ -94,6 +92,14 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<IBookCopyRepository, BookCopyRepository>();
+
+
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IUserBasicInfoRepository, UserBasicInfoRepository>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IAuthService, AuthService>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

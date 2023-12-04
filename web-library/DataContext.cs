@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using web_library.User.Entity;
 
 namespace web_library;
@@ -20,15 +22,7 @@ public class DataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Book.Entity.Book>()
-            .HasMany(left => left.Genres)
-            .WithMany(right => right.Books)
-            .UsingEntity<Dictionary<string, object>>(
-            "book_genres",
-            j => j.HasOne<Genre.Entity.Genre>().WithMany().HasForeignKey("genre_id"),
-            j => j.HasOne<Book.Entity.Book>().WithMany().HasForeignKey("book_id")
-        );
-
+        
         modelBuilder.Entity<User.Entity.User>(entity =>
         {
             entity.ToTable("users");

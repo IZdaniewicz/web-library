@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace web_library.Genre.Entity
 {
@@ -19,6 +20,7 @@ namespace web_library.Genre.Entity
         public Genre(string name)
         {
             Name = name;
+            Books = new List<Book>();
         }
 
     }
