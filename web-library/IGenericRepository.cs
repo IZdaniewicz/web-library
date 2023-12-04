@@ -1,4 +1,6 @@
-﻿namespace web_library;
+﻿using System.Collections.Generic;
+
+namespace web_library;
 
 public interface IGenericRepository<T> where T : class
 {
