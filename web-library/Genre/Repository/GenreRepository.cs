@@ -1,6 +1,8 @@
 ﻿namespace web_library.Genre.Repository
 {
     using Entity;
+    using web_library.Shared;
+
     public class GenreRepository :  IGenreRepository
     {
         private readonly DataContext _context;

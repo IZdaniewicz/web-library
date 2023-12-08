@@ -22,13 +22,13 @@ namespace web_library.Genre.Controller
             try
             {
                 _genreService.createGenre(request);
+                return Ok();
             }
             catch
             (Exception)
             {
-                return NotFound();
+                return BadRequest();
             }
-            return Ok();
         }
     }
 }
