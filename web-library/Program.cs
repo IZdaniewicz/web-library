@@ -4,6 +4,12 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using web_library;
+<<<<<<< HEAD
+using web_library.Book.Repository;
+using web_library.Book.Service;
+using web_library.User.Repository;
+using web_library.User.Service;
+=======
 using web_library.Book.DataProvider;
 using web_library.Book.Repository;
 using web_library.Book.Service;
@@ -11,6 +17,7 @@ using web_library.Genre.Repository;
 using web_library.Genre.Service;
 using web_library.User.Repository;
 using web_library.User.Service;
+>>>>>>> 6-endpoint-do-dodawania-gatunku
 
 var builder = WebApplication.CreateBuilder(args);
 

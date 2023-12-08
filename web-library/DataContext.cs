@@ -6,6 +6,9 @@ namespace web_library
     using Api.Genre.Entity;
     using Api.User.Entity;
     using Api.BookReservation.Entity;
+    using web_library.Book.Entity;
+    using web_library.BookReservation.Entity;
+    using web_library.User.Entity;
 
     public class DataContext : DbContext
     {
