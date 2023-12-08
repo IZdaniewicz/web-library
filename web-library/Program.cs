@@ -4,10 +4,13 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using web_library;
-using web_library.Api.Book.Repository;
-using web_library.Api.Book.Service;
-using web_library.Api.User.Repository;
-using web_library.Api.User.Service;
+using web_library.Book.DataProvider;
+using web_library.Book.Repository;
+using web_library.Book.Service;
+using web_library.Genre.Repository;
+using web_library.Genre.Service;
+using web_library.User.Repository;
+using web_library.User.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,7 +46,12 @@ builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserBasicInfoRepository, UserBasicInfoRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<IGenreRepository,GenreRepository>();
+builder.Services.AddTransient<IGenreService, GenreService>();
 
+builder.Services.AddTransient<IBookRepository, BookRepository>();
+builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddTransient<IBookCopyRepository, BookCopyRepository>();
 
 
 // Add services to the container.
@@ -90,9 +98,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 
-builder.Services.AddTransient<IBookRepository, BookRepository>();
-builder.Services.AddTransient<IBookService, BookService>();
-builder.Services.AddTransient<IBookCopyRepository, BookCopyRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

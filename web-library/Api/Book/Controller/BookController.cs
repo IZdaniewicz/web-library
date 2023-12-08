@@ -28,9 +28,10 @@ namespace web_library.Api.Book.Controller
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            
+            return Ok();
         }
 
         // POST api/<ValuesController>
@@ -41,8 +42,7 @@ namespace web_library.Api.Book.Controller
             {
                 _bookService.createBook(request);
             }
-            catch
-            (Exception)
+            catch (Exception)
             {
                 return NotFound();
             }
@@ -51,8 +51,17 @@ namespace web_library.Api.Book.Controller
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] AssigneGenreToBookRequest request)
         {
+            try
+            {
+                request.book_id = id;
+                _bookService.assigneGenre(request);
+            } catch (Exception)
+            {
+                return NotFound();
+            }
+            return Ok();
         }
 
         // DELETE api/<ValuesController>/5
