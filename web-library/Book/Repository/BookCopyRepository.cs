@@ -18,12 +18,12 @@ namespace web_library.Book.Repository
             _context.SaveChanges();
         }
 
-        public IEnumerable<BookCopy> GetAll()
+        public IEnumerable<BookCopy> FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public BookCopy GetByIdOrThrow(int id)
+        public BookCopy FindByIdOrThrow(int id)
         {
             throw new NotImplementedException();
         }

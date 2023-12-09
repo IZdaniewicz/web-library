@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using web_library.Book.Entity;
+using web_library.Genre.Entity;
+using web_library.Reservation.Entity;
+using web_library.Role.Entity;
 using web_library.User.Entity;
-
-namespace web_library;
-
 public class DataContext : DbContext
 {
     protected readonly IConfiguration Configuration;
@@ -20,7 +20,16 @@ public class DataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User.Entity.User>(entity =>
+        //modelBuilder.Entity<Book>()
+        //    .HasMany(left => left.Genres)
+        //    .WithMany(right => right.Books)
+        //    .UsingEntity<Dictionary<string, object>>(
+        //    "book_genres",
+        //    j => j.HasOne<Genre>().WithMany().HasForeignKey("genre_id"),
+        //    j => j.HasOne<Book>().WithMany().HasForeignKey("book_id")
+        //);
+
+        modelBuilder.Entity<User>(entity =>
         {
             entity.ToTable("users");
             entity.HasIndex(u => u.Email).IsUnique();
@@ -40,7 +49,7 @@ public class DataContext : DbContext
             entity.HasIndex(ubi => ubi.UserId).IsUnique();
         });
 
-        modelBuilder.Entity<Role.Entity.Role>(entity =>
+        modelBuilder.Entity<Role>(entity =>
         {
             entity.ToTable("roles");
             entity.HasKey(r => r.Id);
@@ -49,10 +58,11 @@ public class DataContext : DbContext
         base.OnModelCreating(modelBuilder);
     }
 
-    public DbSet<User.Entity.User> Users { get; set; }
-    public DbSet<Book.Entity.Book> Books { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Book> Books { get; set; }
     public DbSet<BookCopy> BooksCopy { get; set; }
-    public DbSet<Genre.Entity.Genre> Genres { get; set; }
+    public DbSet<Genre> Genres { get; set; }
     public DbSet<UserBasicInfo> UserBasicInfos { get; set; }
-    public DbSet<Role.Entity.Role> Roles { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<Reservation> Reservations{ get; set; }
 }

@@ -1,9 +1,9 @@
 ﻿using web_library.Book.Request;
 
-namespace web_library.Book.Service
+namespace web_library.Book.Service;
+
+public interface IBookService
 {
-    public interface IBookService
-    {
-        void createBook(CreateBookRequest request);
-    }
+    void createBook(CreateBookRequest request);
+    void assigneGenre(AssigneGenreToBookRequest request);
 }

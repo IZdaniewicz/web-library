@@ -1,5 +1,4 @@
 using web_library.SharedExceptions;
-
 namespace web_library.Role.Repository;
 
 public class RoleRepository : IRoleRepository
@@ -11,7 +10,7 @@ public class RoleRepository : IRoleRepository
         _dbContext = dbContext;
     }
 
-    public Entity.Role GetByIdOrThrow(int id)
+    public Entity.Role FindByIdOrThrow(int id)
     {
         Entity.Role? role = _dbContext.Roles.Find(id);
 
@@ -21,7 +20,7 @@ public class RoleRepository : IRoleRepository
         return role;
     }
 
-    public IEnumerable<Entity.Role> GetAll()
+    public IEnumerable<Entity.Role> FindAll()
     {
         return _dbContext.Roles.ToList();
     }

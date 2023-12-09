@@ -1,8 +1,7 @@
-﻿namespace web_library.Book.DataProvider
+﻿namespace web_library.Book.Repository;
+
+using Entity;
+public interface IBookRepository : IGenericRepository<Book>
 {
-    using Entity;
-    public interface IBookRepository : IGenericRepository<Book>
-    {
-        public void Update(Book book);
-    }
+    public void Update(Book book);
 }

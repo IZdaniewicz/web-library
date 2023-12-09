@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using web_library;
@@ -11,9 +12,11 @@ using web_library;
 namespace web_library.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231204004614_reservationEntity")]
+    partial class reservationEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,22 +25,22 @@ namespace web_library.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("BookGenre", b =>
+            modelBuilder.Entity("book_genres", b =>
                 {
-                    b.Property<int>("BooksId")
+                    b.Property<int>("book_id")
                         .HasColumnType("integer");
 
-                    b.Property<int>("GenresId")
+                    b.Property<int>("genre_id")
                         .HasColumnType("integer");
 
-                    b.HasKey("BooksId", "GenresId");
+                    b.HasKey("book_id", "genre_id");
 
-                    b.HasIndex("GenresId");
+                    b.HasIndex("genre_id");
 
-                    b.ToTable("BookGenre");
+                    b.ToTable("book_genres");
                 });
 
-            modelBuilder.Entity("web_library.Book.Entity.Book", b =>
+            modelBuilder.Entity("web_library.Api.Book.Entity.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,7 +88,7 @@ namespace web_library.Migrations
                     b.ToTable("books");
                 });
 
-            modelBuilder.Entity("web_library.Book.Entity.BookCopy", b =>
+            modelBuilder.Entity("web_library.Api.Book.Entity.BookCopy", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -105,7 +108,7 @@ namespace web_library.Migrations
                     b.ToTable("book_copies");
                 });
 
-            modelBuilder.Entity("web_library.Genre.Entity.Genre", b =>
+            modelBuilder.Entity("web_library.Api.Genre.Entity.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -124,7 +127,7 @@ namespace web_library.Migrations
                     b.ToTable("genres");
                 });
 
-            modelBuilder.Entity("web_library.Role.Entity.Role", b =>
+            modelBuilder.Entity("web_library.Api.Reservation.Entity.Reservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -133,17 +136,27 @@ namespace web_library.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
+                    b.Property<int>("bookCopyId")
+                        .HasColumnType("integer")
+                        .HasColumnName("book_copy_id");
+
+                    b.Property<DateOnly>("reservationEndDate")
+                        .HasColumnType("date")
+                        .HasColumnName("reservation_end_date");
+
+                    b.Property<DateOnly>("reservationStartDate")
+                        .HasColumnType("date")
+                        .HasColumnName("reservation_start_date");
 
                     b.HasKey("Id");
 
-                    b.ToTable("roles", (string)null);
+                    b.HasIndex("bookCopyId")
+                        .IsUnique();
+
+                    b.ToTable("reservations");
                 });
 
-            modelBuilder.Entity("web_library.User.Entity.User", b =>
+            modelBuilder.Entity("web_library.Api.User.Entity.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -162,21 +175,15 @@ namespace web_library.Migrations
                         .HasColumnType("text")
                         .HasColumnName("password");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer")
-                        .HasColumnName("role_id");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("RoleId");
-
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("web_library.User.Entity.UserBasicInfo", b =>
+            modelBuilder.Entity("web_library.Api.User.Entity.UserBasicInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -217,24 +224,24 @@ namespace web_library.Migrations
                     b.ToTable("user_basic_info", (string)null);
                 });
 
-            modelBuilder.Entity("BookGenre", b =>
+            modelBuilder.Entity("book_genres", b =>
                 {
-                    b.HasOne("web_library.Book.Entity.Book", null)
+                    b.HasOne("web_library.Api.Book.Entity.Book", null)
                         .WithMany()
-                        .HasForeignKey("BooksId")
+                        .HasForeignKey("book_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("web_library.Genre.Entity.Genre", null)
+                    b.HasOne("web_library.Api.Genre.Entity.Genre", null)
                         .WithMany()
-                        .HasForeignKey("GenresId")
+                        .HasForeignKey("genre_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("web_library.Book.Entity.BookCopy", b =>
+            modelBuilder.Entity("web_library.Api.Book.Entity.BookCopy", b =>
                 {
-                    b.HasOne("web_library.Book.Entity.Book", "Book")
+                    b.HasOne("web_library.Api.Book.Entity.Book", "Book")
                         .WithMany("Copies")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -243,34 +250,39 @@ namespace web_library.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("web_library.User.Entity.User", b =>
+            modelBuilder.Entity("web_library.Api.Reservation.Entity.Reservation", b =>
                 {
-                    b.HasOne("web_library.Role.Entity.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
+                    b.HasOne("web_library.Api.Book.Entity.BookCopy", "bookCopy")
+                        .WithOne("reservation")
+                        .HasForeignKey("web_library.Api.Reservation.Entity.Reservation", "bookCopyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Role");
+                    b.Navigation("bookCopy");
                 });
 
-            modelBuilder.Entity("web_library.User.Entity.UserBasicInfo", b =>
+            modelBuilder.Entity("web_library.Api.User.Entity.UserBasicInfo", b =>
                 {
-                    b.HasOne("web_library.User.Entity.User", "User")
+                    b.HasOne("web_library.Api.User.Entity.User", "User")
                         .WithOne("UserBasicInfo")
-                        .HasForeignKey("web_library.User.Entity.UserBasicInfo", "UserId")
+                        .HasForeignKey("web_library.Api.User.Entity.UserBasicInfo", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("web_library.Book.Entity.Book", b =>
+            modelBuilder.Entity("web_library.Api.Book.Entity.Book", b =>
                 {
                     b.Navigation("Copies");
                 });
 
-            modelBuilder.Entity("web_library.User.Entity.User", b =>
+            modelBuilder.Entity("web_library.Api.Book.Entity.BookCopy", b =>
+                {
+                    b.Navigation("reservation");
+                });
+
+            modelBuilder.Entity("web_library.Api.User.Entity.User", b =>
                 {
                     b.Navigation("UserBasicInfo");
                 });

@@ -2,12 +2,17 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using web_library.Book.DataProvider;
+using web_library.Genre.Service;
+using web_library.Genre.Repository;
 using web_library.Book.Repository;
 using web_library.Book.Service;
 using web_library.Role.Repository;
 using web_library.User.Repository;
 using web_library.User.Service;
+using web_library.Reservation.Service;
+using web_library.Reservation.Repostiory;
+using web_library.Reservation.DataProvider;
+using web_library.Book.DataProvider;
 
 namespace web_library;
 
@@ -92,13 +97,24 @@ public static class DependencyInjection
     {
         services.AddTransient<IBookRepository, BookRepository>();
         services.AddTransient<IBookService, BookService>();
+        services.AddTransient<IBookDataProvider, BookDataProvider>();
+
         services.AddTransient<IBookCopyRepository, BookCopyRepository>();
 
+        services.AddTransient<IGenreService, GenreService>();
+        services.AddTransient<IGenreRepository, GenreRepository>();
+
+
+        services.AddTransient<IReservationService, ReservationService>();
+        services.AddTransient<IReservationRepository, ReservationRepository>();
+        services.AddTransient<IReservationDataProvider, ReservationDataProvider>();
 
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IUserBasicInfoRepository, UserBasicInfoRepository>();
+
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<IAuthService, AuthService>();
+
         services.AddTransient<IRoleRepository, RoleRepository>();
 
         return services;

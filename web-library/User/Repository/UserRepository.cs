@@ -11,7 +11,7 @@ public class UserRepository : IUserRepository
         _dbContext = dbContext;
     }
 
-    public Entity.User GetByIdOrThrow(int id)
+    public Entity.User FindByIdOrThrow(int id)
     {
         Entity.User? user = _dbContext.Users.Find(id);
 
@@ -26,7 +26,7 @@ public class UserRepository : IUserRepository
         return _dbContext.Users.SingleOrDefault(user => user.Email == email);
     }
 
-    public IEnumerable<Entity.User> GetAll()
+    public IEnumerable<Entity.User> FindAll()
     {
         return _dbContext.Users.ToList();
     }
