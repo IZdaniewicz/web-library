@@ -1,39 +1,50 @@
-﻿namespace web_library.Book.Service;
-
-using Entity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
-using Repository;
-using Request;
+using web_library.Book.DataProvider;
 using web_library.Book.Entity;
 using web_library.Book.Repository;
 using web_library.Book.Request;
+using web_library.Role.Enum;
+using web_library.SharedExceptions;
+using web_library.User.Service;
 
-public class BookService : IBookService
+namespace web_library.Book.Service
 {
-    private readonly IBookRepository _bookRepository;
-    private readonly IBookCopyRepository _bookCopyRepository;
-    public BookService(IBookRepository bookRepository, IBookCopyRepository bookCopyRepository)
+    public class BookService : IBookService
     {
-        _bookRepository = bookRepository;
-        _bookCopyRepository = bookCopyRepository;
-    }
+        private readonly IBookRepository _bookRepository;
+        private readonly IBookCopyRepository _bookCopyRepository;
+        private readonly IUserService _userService;
 
-    public void createBook(CreateBookRequest request)
-    {
-        var jsonString = JsonConvert.SerializeObject(request);
-
-        Book entity = JsonConvert.DeserializeObject<Book>(jsonString) ?? throw new JsonException();
-
-        _bookRepository.Add(entity);
-
-        for (int i = 0; i < request.numberOfCopies; i++)
+        public BookService(IBookRepository bookRepository, IBookCopyRepository bookCopyRepository,
+            IUserService userService)
         {
-            BookCopy copy = new(entity);
-            _bookCopyRepository.Add(copy);
+            _bookRepository = bookRepository;
+            _bookCopyRepository = bookCopyRepository;
+            _userService = userService;
         }
 
-        _bookRepository.Update(entity);
+        [Authorize]
+        public void createBook(CreateBookRequest request)
+        {
+            if (!_userService.HasRole(_userService.GetUser(), Roles.Librarian))
+            {
+                throw new UnauthorizedException();
+            }
 
-        return;
+            var jsonString = JsonConvert.SerializeObject(request);
+
+            Entity.Book? entity = JsonConvert.DeserializeObject<Entity.Book>(jsonString) ?? throw new JsonException();
+
+            _bookRepository.Add(entity);
+
+            for (int i = 0; i < request.numberOfCopies; i++)
+            {
+                BookCopy copy = new(entity);
+                _bookCopyRepository.Add(copy);
+            }
+
+            _bookRepository.Update(entity);
+        }
     }
 }

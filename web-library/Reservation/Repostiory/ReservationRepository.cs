@@ -1,42 +1,37 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace web_library.Reservation.Repostiory
+﻿namespace web_library.Reservation.Repostiory;
+using Microsoft.EntityFrameworkCore;
+using SharedExceptions;
+using Entity;
+public class ReservationRepository : IReservationRepository
 {
-    using Entity;
-    using Shared;
-    using web_library.Reservation.Entity;
+    private readonly DataContext _context;
 
-    public class ReservationRepository : IReservationRepository
+    public ReservationRepository(DataContext context)
     {
-        private readonly DataContext _context;
+        _context = context;
+    }
 
-        public ReservationRepository(DataContext context)
-        {
-            _context = context;
-        }
+    public void Add(Reservation entity)
+    {
+        _context.Reservations.Add(entity);
+        _context.SaveChanges();
+    }
 
-        public void Add(Reservation entity)
-        {
-            _context.Reservations.Add(entity);
-            _context.SaveChanges();
-        }
+    public IEnumerable<Reservation> FindAll()
+    {
+        return _context.Reservations
+            .Include(b => b.bookCopy)
+            .ThenInclude(b => b.Book)
+            .ToList();
+    }
 
-        public IEnumerable<Reservation> FindAll()
-        {
-            return _context.Reservations
-                .Include(b => b.bookCopy)
-                .ThenInclude(b => b.Book)
-                .ToList();
-        }
+    public Reservation FindByIdOrThrow(int id)
+    {
+        return _context.Reservations.Find(id) ?? throw new NotFoundException("Reservation not found repository");
+    }
 
-        public Reservation FindByIdOrThrow(int id)
-        {
-            return _context.Reservations.Find(id) ?? throw new NotFoundException("Reservation not found repository");
-        }
-
-        public void Remove(Reservation entity)
-        {
-            throw new NotImplementedException();
-        }
+    public void Remove(Reservation entity)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -1,17 +1,15 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-
-namespace web_library.User.Service;
-using Entity;
-using Repository;
-using Request;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using web_library.Role.Enum;
 using web_library.User.Entity;
 using web_library.User.Repository;
 using web_library.User.Request;
+
+namespace web_library.User.Service;
 
 public class AuthService : IAuthService
 {
@@ -23,7 +21,7 @@ public class AuthService : IAuthService
         IUserRepository userRepository,
         IConfiguration configuration,
         IUserBasicInfoRepository userBasicInfo
-        )
+    )
     {
         _userRepository = userRepository;
         _configuration = configuration;
@@ -39,7 +37,7 @@ public class AuthService : IAuthService
 
         string hashedPassword = HashPassword(request.Password);
 
-        var user = new User(request.Email, hashedPassword);
+        var user = new Entity.User(request.Email, hashedPassword, Roles.Client.GetValue());
 
         _userRepository.Add(user);
 
@@ -51,15 +49,13 @@ public class AuthService : IAuthService
             request.Address,
             user
         ));
-
-
     }
 
     public ActionResult AuthenticateUser(LoginUserRequest request)
     {
         try
         {
-            User? user = _userRepository.FindByEmail(request.Email);
+            Entity.User? user = _userRepository.FindByEmail(request.Email);
 
             if (user != null && VerifyPassword(request.Password, user.Password))
             {
@@ -73,7 +69,8 @@ public class AuthService : IAuthService
                     {
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim(JwtRegisteredClaimNames.Jti,
-                            Guid.NewGuid().ToString())
+                            Guid.NewGuid().ToString()),
+                        new Claim(ClaimTypes.Email, request.Email)
                     }),
                     Expires = DateTime.UtcNow.AddDays(5),
                     Issuer = issuer,

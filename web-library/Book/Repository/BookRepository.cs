@@ -1,42 +1,42 @@
-﻿namespace web_library.Book.Repository;
+﻿using System;
+using System.Collections.Generic;
+using web_library.Book.DataProvider;
 
-using Entity;
-using Microsoft.EntityFrameworkCore;
-using Shared;
-using web_library.Book.Entity;
-
-public class BookRepository : IBookRepository
+namespace web_library.Book.Repository
 {
-    private readonly DataContext _context;
-    public BookRepository(DataContext context)
+    public class BookRepository : IBookRepository
     {
-        _context = context;
-    }
+        private readonly DataContext _context;
+        public BookRepository(DataContext context)
+        {
+            _context = context;
+        }
 
-    public void Add(Book entity)
-    {
-        _context.Books.Add(entity);
-        _context.SaveChanges();
-    }
+        public void Add(Entity.Book entity)
+        {
+            _context.Books.Add(entity);
+            _context.SaveChanges();
+        }
 
-    public IEnumerable<Book> FindAll()
-    {
-        return _context.Books.Include(b => b.Copies).ToList();
-    }
+        public IEnumerable<Entity.Book> FindAll()
+        {
+            throw new NotImplementedException();
+        }
 
-    public Book FindByIdOrThrow(int id)
-    {
-        return _context.Books.Find(id) ?? throw new NotFoundException("Book not found");
-    }
+        public Entity.Book FindByIdOrThrow(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-    public void Remove(Book entity)
-    {
-        throw new NotImplementedException();
-    }
+        public void Remove(Entity.Book entity)
+        {
+            throw new NotImplementedException();
+        }
 
-    public void Update(Book entity)
-    {
-        _context.Books.Update(entity);
-        _context.SaveChanges();
+        public void Update(Entity.Book entity)
+        {
+            _context.Books.Update(entity);
+            _context.SaveChanges();
+        }
     }
 }

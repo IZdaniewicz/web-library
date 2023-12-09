@@ -1,35 +1,36 @@
-﻿namespace web_library.Book.Repository;
-using Entity;
-using Microsoft.EntityFrameworkCore;
-using Shared;
+﻿using System;
+using System.Collections.Generic;
 using web_library.Book.Entity;
 
-public class BookCopyRepository : IBookCopyRepository
+namespace web_library.Book.Repository
 {
-    private readonly DataContext _context;
-    public BookCopyRepository(DataContext context)
+    public class BookCopyRepository : IBookCopyRepository
     {
-        _context = context;
-    }
+        private readonly DataContext _context;
+        public BookCopyRepository(DataContext context)
+        {
+            _context = context;
+        }
 
-    public void Add(BookCopy entity)
-    {
-        _context.BooksCopy.Add(entity);
-        _context.SaveChanges();
-    }
+        public void Add(BookCopy entity)
+        {
+            _context.BooksCopy.Add(entity);
+            _context.SaveChanges();
+        }
 
-    public IEnumerable<BookCopy> FindAll()
-    {
-        throw new NotImplementedException();
-    }
+        public IEnumerable<BookCopy> FindAll()
+        {
+            throw new NotImplementedException();
+        }
 
-    public BookCopy FindByIdOrThrow(int id)
-    {
-        return _context.BooksCopy.Find(id) ?? throw new NotFoundException("Book copy (" + id + ") not found repository");
-    }
+        public BookCopy FindByIdOrThrow(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-    public void Remove(BookCopy entity)
-    {
-        throw new NotImplementedException();
+        public void Remove(BookCopy entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

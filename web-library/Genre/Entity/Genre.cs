@@ -1,26 +1,26 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace web_library.Genre.Entity;
-
-using Book.Entity;
-using web_library.Book.Entity;
-
-[Table("genres")]
-public class Genre
+namespace web_library.Genre.Entity
 {
-    [Column("id")]
-    public int Id { get; set; }
-    [Column("name")]
-    public string Name { get; set; }
-    public List<Book> Books { get; }
-    public Genre()
+    [Table("genres")]
+    public class Genre
     {
-        Books = new List<Book>();
-    }
+        [Column("id")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
 
-    public Genre(string name)
-    {
-        Name = name;
-    }
+        [Column("name")] public string Name { get; set; }
+        public List<Book.Entity.Book> Books { get; }
 
+        public Genre()
+        {
+            Books = new List<Book.Entity.Book>();
+        }
+
+        public Genre(string name)
+        {
+            Name = name;
+            Books = new List<Book.Entity.Book>();
+        }
+    }
 }
