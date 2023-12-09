@@ -27,7 +27,7 @@ public class ReservationRepository : IReservationRepository
 
     public Reservation FindByIdOrThrow(int id)
     {
-        return _context.Reservations.Find(id) ?? throw new NotFoundException("Reservation not found repository");
+        return _context.Reservations.Find(id) ?? throw new NotFoundException("Reservation " + id + " not found in repository");
     }
 
     public void Remove(Reservation entity)

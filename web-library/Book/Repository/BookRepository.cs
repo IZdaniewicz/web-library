@@ -25,7 +25,7 @@ public class BookRepository : IBookRepository
 
     public Book FindByIdOrThrow(int id)
     {
-        return _context.Books.Find(id) ?? throw new NotFoundException("Book not found");
+        return _context.Books.Find(id) ?? throw new NotFoundException("Book " + id + " not found in repository");
     }
 
     public void Remove(Book entity)

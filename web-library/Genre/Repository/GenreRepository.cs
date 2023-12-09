@@ -25,7 +25,7 @@
 
         public Genre FindByIdOrThrow(int id)
         {
-            Genre? genre = _context.Genres.Find(id) ?? throw new NotFoundException("Genre not found");
+            Genre? genre = _context.Genres.Find(id) ?? throw new NotFoundException("Genre " + id + " not found in repository");
             return genre;
             throw new NotImplementedException();
         }

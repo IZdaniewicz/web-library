@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using web_library.Book.Entity;
+using web_library.SharedExceptions;
 
 namespace web_library.Book.Repository
 {
@@ -25,7 +26,7 @@ namespace web_library.Book.Repository
 
         public BookCopy FindByIdOrThrow(int id)
         {
-            throw new NotImplementedException();
+            return _context.BooksCopy.Find(id) ?? throw new NotFoundException("Book copy" + id + " not found in repository");
         }
 
         public void Remove(BookCopy entity)
