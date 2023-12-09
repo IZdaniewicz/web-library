@@ -11,6 +11,8 @@ using web_library;
 
 namespace web_library.Migrations
 {
+    [DbContext(typeof(DataContext))]
+    [Migration("20231202031627_userAndUserBasicInfoEntity")]
     partial class userAndUserBasicInfoEntity
     {
         /// <inheritdoc />

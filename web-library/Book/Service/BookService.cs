@@ -34,10 +34,10 @@ namespace web_library.Book.Service
         [Authorize]
         public void createBook(CreateBookRequest request)
         {
-            if (!_userService.HasRole(_userService.GetUser(), Roles.Librarian))
-            {
-                throw new UnauthorizedException();
-            }
+            //if (!_userService.HasRole(_userService.GetUser(), Roles.Librarian))
+            //{
+            //    throw new UnauthorizedException();
+            //}
 
             var jsonString = JsonConvert.SerializeObject(request);
 
