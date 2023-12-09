@@ -1,14 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using web_library;
-using web_library.Api.Book.Repository;
-using web_library.Api.Book.Service;
-using web_library.Api.Book.DataProvider;
-using web_library.Api.User.Repository;
-using web_library.Api.User.Service;
-using web_library.Api.Reservation.Repostiory;
-using web_library.Api.Reservation.Service;
-using web_library.Api.Reservation.DataProvider;
+using web_library.Book.DataProvider;
+using web_library.Book.Repository;
+using web_library.Book.Service;
+using web_library.User.Repository;
+using web_library.User.Service;
+using web_library.Reservation.DataProvider;
+using web_library.Reservation.Repostiory;
+using web_library.Reservation.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DataContext>(options =>
