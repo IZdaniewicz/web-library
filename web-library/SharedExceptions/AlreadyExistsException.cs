@@ -1,4 +1,6 @@
-namespace web_library.Shared;
+using System;
+
+namespace web_library.SharedExceptions;
 
 public class AlreadyExistsException : Exception
 {
