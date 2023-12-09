@@ -24,7 +24,7 @@ public class ReservationService : IReservationService
     public void createReservation(CreateReservationRequest request)
     {
         BookCopy bookCopy = _bookCopyRepository.FindByIdOrThrow(request.book_copy_id);
-        Reservation reservation = new(request.reservation_start_date, request.reservation_end_date, request.book_copy_id);
+        Reservation reservation = new(request.reservation_start_date, request.reservation_start_date.AddDays(30), request.book_copy_id);
         _reservationRepository.Add(reservation);
     }
 }
