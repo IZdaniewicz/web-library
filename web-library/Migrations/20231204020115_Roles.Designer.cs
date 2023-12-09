@@ -11,9 +11,7 @@ using web_library;
 
 namespace web_library.Migrations
 {
-    [DbContext(typeof(DataContext))]
-    [Migration("20231204020115_Roles")]
-    partial class Roles
+    partial class userAndUserBasicInfoEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,19 +23,19 @@ namespace web_library.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("BookGenre", b =>
+            modelBuilder.Entity("book_genres", b =>
                 {
-                    b.Property<int>("BooksId")
+                    b.Property<int>("book_id")
                         .HasColumnType("integer");
 
-                    b.Property<int>("GenresId")
+                    b.Property<int>("genre_id")
                         .HasColumnType("integer");
 
-                    b.HasKey("BooksId", "GenresId");
+                    b.HasKey("book_id", "genre_id");
 
-                    b.HasIndex("GenresId");
+                    b.HasIndex("genre_id");
 
-                    b.ToTable("BookGenre");
+                    b.ToTable("book_genres");
                 });
 
             modelBuilder.Entity("web_library.Book.Entity.Book", b =>
@@ -127,25 +125,6 @@ namespace web_library.Migrations
                     b.ToTable("genres");
                 });
 
-            modelBuilder.Entity("web_library.Role.Entity.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("roles", (string)null);
-                });
-
             modelBuilder.Entity("web_library.User.Entity.User", b =>
                 {
                     b.Property<int>("Id")
@@ -165,16 +144,10 @@ namespace web_library.Migrations
                         .HasColumnType("text")
                         .HasColumnName("password");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer")
-                        .HasColumnName("role_id");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
                         .IsUnique();
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("users", (string)null);
                 });
@@ -220,17 +193,17 @@ namespace web_library.Migrations
                     b.ToTable("user_basic_info", (string)null);
                 });
 
-            modelBuilder.Entity("BookGenre", b =>
+            modelBuilder.Entity("book_genres", b =>
                 {
                     b.HasOne("web_library.Book.Entity.Book", null)
                         .WithMany()
-                        .HasForeignKey("BooksId")
+                        .HasForeignKey("book_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("web_library.Genre.Entity.Genre", null)
                         .WithMany()
-                        .HasForeignKey("GenresId")
+                        .HasForeignKey("genre_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -244,17 +217,6 @@ namespace web_library.Migrations
                         .IsRequired();
 
                     b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("web_library.User.Entity.User", b =>
-                {
-                    b.HasOne("web_library.Role.Entity.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("web_library.User.Entity.UserBasicInfo", b =>
