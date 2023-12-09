@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+<<<<<<< HEAD
 using Microsoft.OpenApi.Models;
 using web_library;
 using web_library.Book.DataProvider;
@@ -9,12 +10,16 @@ using web_library.User.Service;
 using web_library.Reservation.DataProvider;
 using web_library.Reservation.Repostiory;
 using web_library.Reservation.Service;
+=======
+using web_library;
+>>>>>>> master
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase"))
 );
 
+<<<<<<< HEAD
 //builder.Services.AddAuthorization();
 //builder.Services.AddAuthentication(options =>
 //{
@@ -91,6 +96,14 @@ builder.Services.AddTransient<IBookCopyRepository, BookCopyRepository>();
 builder.Services.AddTransient<IReservationRepository, ReservationRepository>();
 builder.Services.AddTransient<IReservationService, ReservationService>();
 builder.Services.AddTransient<IReservationDataProvider, ReservationDataProvider>();
+=======
+builder.Services.AddJwtAuth(builder.Configuration);
+builder.Services.AddSwagger();
+builder.Services.ControllersOptions();
+builder.Services.AddHttpContextAccessor();
+builder.Services.ServicesInjection();
+
+>>>>>>> master
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -105,9 +118,6 @@ app.UseRouting();
 //app.UseAuthentication();
 //app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
 app.Run();

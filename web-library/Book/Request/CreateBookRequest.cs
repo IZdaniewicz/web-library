@@ -1,7 +1,10 @@
-﻿namespace web_library.Book.Request
+﻿using System;
+
+namespace web_library.Book.Request
 {
     public class CreateBookRequest
     {
+<<<<<<< HEAD
         public string isbn { get; set; }
         public string title { get; set; }
         public string author { get; set; }
@@ -34,5 +37,15 @@
             description = descriptionList[bookNumber];
             numberOfCopies = numberOfCopiesList[bookNumber];
         }
+=======
+        public string ISBN { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Publisher { get; set; }
+        public DateOnly Publication_date { get; set; }
+        public string Location { get; set; }
+        public string Description { get; set; }
+        public int NumberOfCopies { get; set; }
+>>>>>>> master
     }
 }

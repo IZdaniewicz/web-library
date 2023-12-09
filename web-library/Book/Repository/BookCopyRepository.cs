@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 ﻿namespace web_library.Book.Repository;
 using Entity;
 using Microsoft.EntityFrameworkCore;
 using Shared;
+=======
+﻿using System;
+using System.Collections.Generic;
+>>>>>>> master
 using web_library.Book.Entity;
 
 public class BookCopyRepository : IBookCopyRepository

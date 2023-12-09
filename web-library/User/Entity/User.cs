@@ -9,18 +9,20 @@ public class User
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
-    [Column(name: "email")]
-    public string Email { get; set; }
+    [Column(name: "role_id")] public int RoleId { get; set; }
 
-    [Column(name: "password")]
-    public string Password { get; set; }
+    [Column(name: "email")] public string Email { get; set; }
+
+    [Column(name: "password")] public string Password { get; set; }
+
+    public Role.Entity.Role Role { get; set; }
 
     public UserBasicInfo? UserBasicInfo { get; set; }
 
-    public User(string email, string password)
+    public User(string email, string password, int roleId)
     {
         Email = email;
         Password = password;
+        RoleId = roleId;
     }
-
 }
