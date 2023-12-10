@@ -1,5 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using web_library;
+using web_library.Book.DataProvider;
+using web_library.Book.Repository;
+using web_library.Book.Service;
+using web_library.Genre.Repository;
+using web_library.Genre.Service;
+using web_library.User.Repository;
+using web_library.User.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 

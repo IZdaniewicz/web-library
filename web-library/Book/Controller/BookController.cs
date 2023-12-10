@@ -21,46 +21,19 @@ namespace web_library.Book.Controller
             _bookService = bookService;
         }
 
-        // GET: api/<ValuesController>
-        [HttpGet]
-        public ActionResult<IEnumerable<Book>> Get()
-        {
-            return Ok();
-        }
-
-        // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<ValuesController>
         [HttpPost]
         public ActionResult Post([FromBody] CreateBookRequest request)
         {
-            try
-            {
-                _bookService.createBook(request);
-            }
-            catch
-            (Exception)
-            {
-                return NotFound();
-            }
+            _bookService.createBook(request);
             return Ok();
         }
 
-        // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] AssigneGenreToBookRequest request)
         {
-        }
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            request.book_id = id;
+            _bookService.assigneGenre(request);
+            return Ok();
         }
     }
 }

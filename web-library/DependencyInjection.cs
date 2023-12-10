@@ -8,6 +8,8 @@ using web_library.Book.Service;
 using web_library.Role.Repository;
 using web_library.User.Repository;
 using web_library.User.Service;
+using web_library.Genre.Service;
+using web_library.Genre.Repository;
 
 namespace web_library;
 
@@ -93,13 +95,13 @@ public static class DependencyInjection
         services.AddTransient<IBookRepository, BookRepository>();
         services.AddTransient<IBookService, BookService>();
         services.AddTransient<IBookCopyRepository, BookCopyRepository>();
-
-
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IUserBasicInfoRepository, UserBasicInfoRepository>();
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<IAuthService, AuthService>();
         services.AddTransient<IRoleRepository, RoleRepository>();
+        services.AddTransient<IGenreRepository,GenreRepository>();
+        services.AddTransient<IGenreService, GenreService>();
 
         return services;
     }
