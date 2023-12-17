@@ -31,8 +31,7 @@ namespace web_library.Book.Controller
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] AssigneGenreToBookRequest request)
         {
-            request.book_id = id;
-            _bookService.assigneGenre(request);
+            _bookService.assigneGenre(id,request);
             return Ok();
         }
     }

@@ -53,9 +53,9 @@ namespace web_library.Book.Service
 
             _bookRepository.Update(entity);
         }
-        public void assigneGenre(AssigneGenreToBookRequest request)
+        public void assigneGenre(int bookId, AssigneGenreToBookRequest request)
         {
-            Book? book = _bookRepository.GetByIdOrThrow(request.book_id);
+            Book? book = _bookRepository.GetByIdOrThrow(bookId);
             foreach (var id in request.genres_ids)
             {
                 Genre? genre = _genreRepository.GetByIdOrThrow(id);

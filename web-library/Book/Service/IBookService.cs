@@ -5,6 +5,6 @@ namespace web_library.Book.Service
     public interface IBookService
     {
         void createBook(CreateBookRequest request);
-        void assigneGenre(AssigneGenreToBookRequest request);
+        void assigneGenre(int bookId, AssigneGenreToBookRequest request);
     }
 }

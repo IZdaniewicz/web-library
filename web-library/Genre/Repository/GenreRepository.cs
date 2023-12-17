@@ -14,7 +14,6 @@ public class GenreRepository :  IGenreRepository
     public void Add(Genre entity)
     {
         _context.Genres.Add(entity);
-        _context.Add(entity);
         _context.SaveChanges();
     }
 
@@ -27,7 +26,6 @@ public class GenreRepository :  IGenreRepository
     {
         Genre? genre = _context.Genres.Find(id) ?? throw new NotFoundException("Genre "+id+" not found in repository");
         return genre;
-        throw new NotImplementedException();
     }
 
     public void Remove(Genre entity)
